@@ -10,7 +10,7 @@ import se.lexicon.exceptions.workshop.exceptions.DuplicateNameException;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 
 public class NameService {
-	
+
 
 	    private List<String>maleFirstNames;
 	    private List<String>femaleFirstNames;
@@ -57,7 +57,7 @@ public class NameService {
 
 	    public Gender getRandomGender(){
 	        return random.nextInt(100) > 50 ? Gender.FEMALE : Gender.MALE;
-	    }
+		}
 
 
 	    /**
@@ -72,7 +72,7 @@ public class NameService {
 			}
 	    	femaleFirstNames.add(name);
 	    	CSVReader_Writer.saveFemaleNames(femaleFirstNames);
-	    		
+
 	    }
 
 	    /**
@@ -105,5 +105,5 @@ public class NameService {
 	    }
 
 
-	
+
 }

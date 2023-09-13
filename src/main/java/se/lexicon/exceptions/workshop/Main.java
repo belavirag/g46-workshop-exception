@@ -10,19 +10,19 @@ import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 
 public class Main {
 
-	public static void main(String[] args) {
-		
-		List <String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
-        List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
+    public static void main(String[] args) {
 
-        List <String> lastNames = null;
+        List<String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
+        List<String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
+
+        List<String> lastNames = null;
         try {
             lastNames = CSVReader_Writer.getLastNames();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        NameService nameService = new NameService(maleFirstNames, femaleFirstNames,lastNames);
+        NameService nameService = new NameService(maleFirstNames, femaleFirstNames, lastNames);
 
         try {
             nameService.addMaleFirstName("Bela");
@@ -33,6 +33,6 @@ public class Main {
         Person test = nameService.getNewRandomPerson();
         System.out.println(test);
 
-	}
+    }
 
 }
