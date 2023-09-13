@@ -1,10 +1,12 @@
 package se.lexicon.exceptions.workshop.data_access;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import se.lexicon.exceptions.workshop.domain.Gender;
 import se.lexicon.exceptions.workshop.domain.Person;
+import se.lexicon.exceptions.workshop.exceptions.DuplicateNameException;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 
 public class NameService {
@@ -17,6 +19,9 @@ public class NameService {
 
 	    //should be no nulls
 	    public NameService(List<String> maleFirstNames, List<String> femaleFirstNames, List<String> lastNames) {
+			Objects.requireNonNull(maleFirstNames, "maleFirstNames was null!");
+			Objects.requireNonNull(femaleFirstNames, "femaleFirstNames was null!");
+			Objects.requireNonNull(lastNames, "lastName was null!");
 
 	        this.maleFirstNames = maleFirstNames;
 	        this.femaleFirstNames = femaleFirstNames;
@@ -61,7 +66,10 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addFemaleFirstName(String name){
+	    public void addFemaleFirstName(String name) throws DuplicateNameException{
+			if (femaleFirstNames.contains(name)) {
+				throw new DuplicateNameException("list already contains female name!");
+			}
 	    	femaleFirstNames.add(name);
 	    	CSVReader_Writer.saveFemaleNames(femaleFirstNames);
 	    		
@@ -73,7 +81,10 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addMaleFirstName(String name){
+	    public void addMaleFirstName(String name) throws DuplicateNameException{
+			if (maleFirstNames.contains(name)) {
+				throw new DuplicateNameException("list already contains male name!");
+			}
 	    	maleFirstNames.add(name);
 	        CSVReader_Writer.saveMaleNames(maleFirstNames);
 	    }
@@ -84,7 +95,11 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param lastName
 	     */
-	    public void addLastName(String lastName){
+	    public void addLastName(String lastName) throws DuplicateNameException{
+			if (lastNames.contains(lastName)) {
+				throw new DuplicateNameException("lastName already contains name!");
+			}
+
 	    	lastNames.add(lastName);
 	        CSVReader_Writer.saveLastNames(lastNames);
 	    }
